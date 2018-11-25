@@ -73,5 +73,30 @@ function getObjectLength(obj) {
 
 // 为element增加一个样式名为newClassName的新样式
 function addClass(element, newClassName) {
-    // your implement
+    element.classList.add(newClassName);
 }
+
+
+
+// 移除element中的样式oldClassName+
+function removeClass(element, oldClassName) {
+    element.classList.remove(oldClassName);
+}
+
+
+
+// 判断siblingNode和element是否为同一个父元素下的同一级的元素，返回bool值
+function isSiblingNode(element, siblingNode) {
+    return element.parentNode == siblingNode.parentNode;
+}
+
+
+
+// 获取element相对于浏览器窗口的位置，返回一个对象{x, y}
+function getPosition(element) {
+    const position = element.getBoundingClientRect();
+    return position;
+}
+
+let h1 = document.body.querySelector('h1');
+let p = document.body.querySelector('div p');
