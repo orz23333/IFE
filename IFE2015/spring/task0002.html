@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task0002.html</title>
+    <script src="./js/util.js"></script>
+  </head>
+
+  <body>
+    <h1>IFE2015_Spring</h1>
+    <input id="number1" type="text">
+    <input id="number2" type="text">
+    <span id="result">Nothing</span>
+    <button id="addbtn">Button</button>
+
+    <script>
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      function add(num1, num2) {
+        return num1 + num2;
+      }
+
+      function renderResult(result) {
+        $("result").innerHTML = result;
+      }
+
+      function addEventHandle() {
+        var num1 = $("number1").value;
+        var num2 = $("number2").value;
+        var result = add(num1, num2);
+        renderResult(result);
+      }
+
+      function initEvent() {
+        $("addbtn").addEventListener("click", addEventHandle, false);
+      }
+
+      initEvent();
+    </script>
+  </body>
+
+</html>
