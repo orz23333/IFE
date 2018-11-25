@@ -98,5 +98,41 @@ function getPosition(element) {
     return position;
 }
 
-let h1 = document.body.querySelector('h1');
-let p = document.body.querySelector('div p');
+
+
+// 给一个element绑定一个针对event事件的响应，响应函数为listener
+function addEvent(element, event, listener) {
+    let ele = document.body.querySelector(element);
+    ele.addEventListener( event, listener );
+}
+
+
+
+// 移除element对象对于event事件发生时执行listener的响应
+function removeEvent(element, event, listener) {
+    element.removeEventListener(event, listener);
+}
+
+
+
+// 事件委托
+function delegateEvent(element, tag, eventName, listener) {
+    let ele = document.body.querySelector(element);
+    ele.addEventListener(eventName, function (event) {
+      if (event.target.tagName.toLowerCase() == tag) {
+        listener(event);
+      }
+    });
+}
+
+
+function say() {
+  console.log('这是一个ul列表里li点击事件');
+}
+delegateEvent('#list', 'li', 'click', say);
+
+const btn = document.body.querySelector('#btn');
+btn.addEventListener('click', function () {
+  let list = document.body.querySelector('#list');
+  list.innerHTML = '<li>New item</li>';
+})

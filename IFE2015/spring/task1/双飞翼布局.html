@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>双飞翼布局</title>
+    <style>
+      .grid-s5m0e5 {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .grid-s5m0e5 .col-main {
+        float: left;
+        width: 100%;
+        min-height: 30px;
+        background: #000;
+      }
+
+      .grid-s5m0e5 .col-main .main-wrap {
+        margin-left: 200px;
+        /*与col-sub产生10像素距离*/
+        margin-right: 200px;
+        /*与col-extra产生10像素距离*/
+        background: #0f0;
+        min-height: 30px;
+      }
+
+      .col-sub {
+        float: left;
+        width: 190px;
+        min-height: 30px;
+        background: #f00;
+        margin-left: -100%;
+      }
+
+      .col-extra {
+        float: left;
+        width: 190px;
+        min-height: 30px;
+        background: #00f;
+        margin-left: -190px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="grid-s5m0e5">
+      <div class="col-main">
+        <div class="main-wrap">
+          我是主列，出来吧！
+        </div>
+      </div>
+      <div class="col-sub">我是子列</div>
+      <div class="col-extra">我是附加列</div>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task创建和取得cookie</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      // 设置cookie
+      function setCookie(cookieName, cookieValue, expiredays) {
+        var exdate = new Date()
+        exdate.setDate(exdate.getDate() + expiredays)
+        document.cookie = cookieName + "=" + escape(cookieValue) +
+          ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+      }
+
+
+
+
+      // 获取cookie值
+      function getCookie(cookieName) {
+        if (document.cookie.length > 0) {
+          c_start = document.cookie.indexOf(cookieName + "=")
+          if (c_start != -1) {
+            c_start = c_start + cookieName.length + 1
+            c_end = document.cookie.indexOf(";", c_start)
+            if (c_end == -1) c_end = document.cookie.length
+            return unescape(document.cookie.substring(c_start, c_end))
+          }
+        }
+        return ""
+      }
+
+
+      function checkCookie() {
+        username = getCookie('username')
+        if (username != null && username != "") {
+          alert('Welcome again ' + username + '!')
+        } else {
+          username = prompt('Please enter your name:', "")
+          if (username != null && username != "") {
+            setCookie('username', username, 365)
+          }
+        }
+      }
+
+      checkCookie();
+    </script>
+  </body>
+
+</html>

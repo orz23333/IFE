@@ -1,0 +1,73 @@
+#n1 {
+  width: 480px;
+  height: 200px;
+  background-color: red;
+  margin: 0 auto 10px;
+  text-align: center;
+  line-height: 200px;
+}
+
+#n2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 10px;
+}
+
+
+#n2 div {
+  width: 480px;
+  height: 200px;
+  background-color: red;
+  text-align: center;
+  line-height: 200px;
+}
+
+.bor div {
+  height: 1px;
+}
+
+.b1 {
+  margin: 0 3px;
+  background-color: black;
+}
+
+.b2,
+.b3,
+.b4,
+.mid {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.b2 {
+  margin: 0 2px;
+}
+
+.b3 {
+  margin: 0 1px;
+}
+
+.b4 {
+  margin: 0 1px;
+}
+
+.mid p {
+  margin: 0;
+  padding: 0 10px;
+  font-size: 12px;
+  line-height: 24px;
+  white-space: pre-wrap;
+}
+
+nav {
+  float: left;
+  width: 25%;
+  border: 1px solid black;
+}
+
+section {
+  margin-left: 25%;
+  border: 1px solid orange;
+  padding: 1px 5px;
+}
