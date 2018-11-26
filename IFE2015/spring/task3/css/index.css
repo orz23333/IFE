@@ -1,0 +1,157 @@
+    html {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5em 1em;
+      background-color: rgb(217, 217, 217);
+      color: rgb(139,139,139);
+      border: 1px solid #ccc;
+    }
+
+
+
+    /* section布局 */
+    #main {
+      display: flex;
+      background-color: rgb(240, 240, 240);
+      flex: 1;    
+    }
+
+    #main #center {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 200px;
+      background-color: #fff;
+      border-left: 1px solid #ccc;
+      overflow: auto;
+    }
+
+    #main #left {
+      display: flex;
+      flex-direction: column;
+      flex-basis: 200px;
+      border-left: 1px solid #ccc;
+      overflow: auto;
+    }
+
+    #main #right {
+      border-left: 1px solid #ccc;
+      flex: 1;
+      border-bottom: 1px solid #ccc;
+      overflow: auto;
+    }
+
+
+    /* footer布局 */
+    footer {
+      text-align: center
+    }
+
+
+
+    /* center细节 */
+    #center div button {
+      background-color: rgb(255, 255, 255);
+    }    
+
+    #center div:nth-child(1) {
+      padding: 1em 0.6em;
+      height: 23px;
+    }
+
+    #center div:nth-child(2) {
+      flex: 1;
+      border-top: 1px solid #ccc;
+    }
+
+    #center div:nth-child(2n-1) {
+      background-color: rgb(240, 240, 240);
+    }
+
+    #center div:last-child {
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 45px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }    
+
+
+
+    /* left细节 */
+    #sort {
+      flex: 1;
+    }
+
+    #left h4 {
+      margin-top: 0.5em ;
+      margin-bottom: 0;
+      padding: 10px; 
+    }
+
+    #sort ul {
+      list-style: none;
+      margin: 0;
+      padding-left: 20px;
+
+    }
+
+    #left div:last-child {
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      padding: 10px 45px;
+      font-size: 0.8em;
+      font-weight: bold;
+    }
+
+
+    /* right细节 */
+
+    #right div:nth-child(1) {
+      padding-left: 1em;
+      margin: 0;
+      height: 55px;
+      line-height: 55px;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    #right div:nth-child(1) span {
+      flex: 1;
+    }
+
+    #right div:nth-child(1) button {
+      margin-right: 15px;
+    }
+
+
+    #right p {
+      padding-left: 1em;
+      margin: 0;
+      height: 40px;
+      line-height: 40px;
+      background-color: rgb(249, 249, 236);
+      border-bottom: 1px solid #ccc;
+    }
+
+    #right div:last-child {
+      padding: 1em;
+      overflow: hidden;
+    }
+
+    /* 文字细节 */
+    header > h1 {
+      margin: 0;
+      padding: 0;
+    }

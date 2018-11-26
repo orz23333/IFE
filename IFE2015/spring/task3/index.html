@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GTD Tools</title>
+    <link rel="stylesheet" href="./css/index.css">
+  </head>
+
+  <body>
+    <header>
+      <h1>GTD Tools</h1>
+    </header>
+
+    <section id="main">
+      <section id="left">
+        <h4>所有任务<span id="allTaskCount">(3)</span></h4>
+        <div id="sort">
+          <h4>分类列表</h4>
+          <ul>
+            <li>默认分类<span>(3)</span>
+              <ul>
+                <li>task1(3)</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div>新增分类</div>
+      </section>
+
+      <section id="center">
+        <div>
+          <button id="all">所有</button>
+          <button id="undone">未完成</button>
+          <button id="done">已完成</button>
+        </div>
+
+        <div>
+          <ul>
+            <li>2018-11-26</li>
+            <li>2018-11-27</li>
+            <li>2018-11-28</li>
+          </ul>
+        </div>
+
+        <div>新增任务</div>
+      </section>
+
+      <section id="right">
+        <div>
+          <span>to-do 6</span>
+          <button id="makedone">完成</button>
+          <button id="makechanged">修改</button>
+        </div>
+        <p>任务日期: </p>
+        <div>最左侧为任务分类列表，支持查看所有任务或者查看某个分类下的所有任务
+          初始时有一个默认分类，进入页面时默认选中默认分类。
+          分类支持多层级别。
+          分类支持增加分类、删除分类两个操作
+          在左侧分类最下方有添加操作，点击后弹出浮层让输入新分类的名称，新分类将会被添加到当前选中的分类下。浮层可以为自行设计实现，也可以直接使用prompt。
+          当鼠标hover过某一个分类时，右侧会出现删除按钮，点击后，弹出确认是否删除的浮层，确认后删除掉该分类。弹出的确认浮层可以自行设计实现，也可以直接使用confirm。
+          不能为默认分类添加子分类，也不能删除默认分类。
+          每一个分类名字后显示一个当前分类下的未完成任务总数量。
+          中间列为任务列表，用于显示当前选中分类下的所有未完成任务
+          任务列表按日期（升序或者降序，自行设定）进行聚类
+          用不同的字体颜色或者图标来标示任务的状态，任务状态有两张：已完成或未完成。
+          下方显示新增任务的按钮，点击后，右侧列会变成新增任务编辑界面。
+          单击某个任务后，会在右侧显示该任务的详细信息。
+          在任务列表的上方有任务筛选项，可以选择在任务列表中显示所有任务，或者只显示已完成或者未完成的任务。
+          右侧为任务详细描述部分
+          第一行显示任务标题，对于未完成的任务，在标题行的右侧会有完成任务的操作按钮及编辑任务的按钮。
+          点击完成任务按钮时，弹出确认是否确认完成的浮层，确认后该任务完成，更新中间列任务的状态。弹出的确认浮层可以自行设计实现，也可以直接使用confirm。
+          点击编辑任务操作后，右侧变更为编辑窗口。</div>
+      </section>
+    </section>
+
+
+
+    <footer>
+      <h5>© 2018 Orz23333@CopyRight</h5>
+    </footer>
+  </body>
+
+</html>
