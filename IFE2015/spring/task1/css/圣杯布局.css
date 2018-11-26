@@ -1,0 +1,30 @@
+      .container {
+        padding: 0 150px 0 100px;
+      }
+
+      .left,
+      .main,
+      .right {
+        min-height: 130px;
+        float: left;
+        position: relative;
+      }
+
+      .left {
+        background: green;
+        width: 100px;
+        margin-left: -100%;
+        left: -100px;
+      }
+
+      .main {
+        background-color: blue;
+        width: 100%;
+      }
+
+      .right {
+        background-color: red;
+        width: 150px;
+        margin-left: -150px;
+        right: -150px;
+      }

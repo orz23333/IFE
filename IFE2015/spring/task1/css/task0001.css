@@ -52,6 +52,8 @@
   margin: 0 1px;
 }
 
+
+/* 简单布局 */
 .mid p {
   margin: 0;
   padding: 0 10px;
@@ -70,4 +72,66 @@ section {
   margin-left: 25%;
   border: 1px solid orange;
   padding: 1px 5px;
+}
+
+
+
+
+
+/* 两列布局 */
+#layout2 {
+  margin-top: 10px;
+}
+
+#layout::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#diva {
+  float: left;
+  width: 200px;
+  height: 100px;
+  background-color: red;
+}
+
+#divb {
+  overflow: auto;
+  height: 100px;
+  background-color: blue;
+}
+
+#divc {
+  height: 100px;
+  background-color: yellow;
+  clear: both;
+  margin-bottom: 
+}
+
+
+/* 三列布局 */
+#layout3 {
+  margin-top: 10px;
+}
+
+.left {
+  float: left;
+  width: 100px;
+  background: blue;
+  height: 100px;
+
+}
+
+.right {
+  float: right;
+  width: 100px;
+  background: blue;
+  height: 100px;
+}
+
+.center {
+  margin: 0px 100px; 
+  background: red;
+  height: 100px;
 }

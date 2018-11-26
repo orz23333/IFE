@@ -1,0 +1,29 @@
+      .left,
+      .main,
+      .right {
+        float: left;
+        min-height: 130px;
+        text-align: center;
+      }
+
+      .left {
+        margin-left: -100%;
+        background: green;
+        width: 200px;
+      }
+
+      .right {
+        margin-left: -300px;
+        background-color: red;
+        width: 300px;
+      }
+
+      .main {
+        background-color: blue;
+        width: 100%;
+        
+      }
+
+      .content {
+        margin: 0 300px 0 200px;
+      }
