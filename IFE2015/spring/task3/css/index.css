@@ -13,7 +13,7 @@
     header {
       padding: 1.5em 1em;
       background-color: rgb(217, 217, 217);
-      color: rgb(139,139,139);
+      color: rgb(139, 139, 139);
       border: 1px solid #ccc;
     }
 
@@ -23,13 +23,13 @@
     #main {
       display: flex;
       background-color: rgb(240, 240, 240);
-      flex: 1;    
+      flex: 1;
     }
 
     #main #center {
       display: flex;
       flex-direction: column;
-      flex-basis: 200px;
+      flex-basis: 210px;
       background-color: #fff;
       border-left: 1px solid #ccc;
       overflow: auto;
@@ -61,7 +61,7 @@
     /* center细节 */
     #center div button {
       background-color: rgb(255, 255, 255);
-    }    
+    }
 
     #center div:nth-child(1) {
       padding: 1em 0.6em;
@@ -71,6 +71,11 @@
     #center div:nth-child(2) {
       flex: 1;
       border-top: 1px solid #ccc;
+    }
+
+    #center div:nth-child(2) ul {
+      list-style: none;
+      padding-left: 20px; 
     }
 
     #center div:nth-child(2n-1) {
@@ -83,7 +88,12 @@
       padding: 10px 45px;
       font-size: 0.8em;
       font-weight: bold;
-    }    
+    }
+
+    #center div:last-child:hover {
+      cursor: pointer;
+      color: red;
+    }
 
 
 
@@ -93,15 +103,25 @@
     }
 
     #left h4 {
-      margin-top: 0.5em ;
+      margin-top: 0.5em;
       margin-bottom: 0;
-      padding: 10px; 
+      padding: 10px;
+    }
+
+    #left h4:hover {
+      cursor: pointer;
+      background-color: #fff;
     }
 
     #sort ul {
       list-style: none;
       margin: 0;
       padding-left: 20px;
+    }
+
+    #sort ul li span:hover {
+      background-color: #fff;
+      cursor: pointer;
 
     }
 
@@ -111,6 +131,11 @@
       padding: 10px 45px;
       font-size: 0.8em;
       font-weight: bold;
+    }
+
+    #left div:last-child:hover {
+      cursor: pointer;
+      color: red;
     }
 
 
@@ -151,7 +176,7 @@
     }
 
     /* 文字细节 */
-    header > h1 {
+    header>h1 {
       margin: 0;
       padding: 0;
     }

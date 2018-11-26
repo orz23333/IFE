@@ -16,13 +16,22 @@
 
     <section id="main">
       <section id="left">
-        <h4>所有任务<span id="allTaskCount">(3)</span></h4>
+        <h4>所有任务</h4>
         <div id="sort">
           <h4>分类列表</h4>
           <ul>
-            <li>默认分类<span>(3)</span>
+            <li>
+              <span>默认分类</span>
               <ul>
-                <li>task1(3)</li>
+                <li><span>task1</span></li>
+                <li><span>读书</span></li>
+              </ul>
+            </li>
+
+            <li>
+              <span>课程设计</span>
+              <ul>
+                <li><span>找资料</span></li>
               </ul>
             </li>
           </ul>
@@ -31,10 +40,10 @@
       </section>
 
       <section id="center">
-        <div>
-          <button id="all">所有</button>
-          <button id="undone">未完成</button>
-          <button id="done">已完成</button>
+        <div id="btn-status">
+          <button>所有</button>
+          <button>未完成</button>
+          <button>已完成</button>
         </div>
 
         <div>
@@ -49,10 +58,10 @@
       </section>
 
       <section id="right">
-        <div>
+        <div id="btn-edit">
           <span>to-do 6</span>
-          <button id="makedone">完成</button>
-          <button id="makechanged">修改</button>
+          <button>完成</button>
+          <button>修改</button>
         </div>
         <p>任务日期: </p>
         <div>最左侧为任务分类列表，支持查看所有任务或者查看某个分类下的所有任务
@@ -81,6 +90,8 @@
     <footer>
       <h5>© 2018 Orz23333@CopyRight</h5>
     </footer>
+
+  <script src="./js/index.js"></script>
   </body>
 
 </html>
