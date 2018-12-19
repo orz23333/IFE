@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    <div>
+    <div class="select">
       <label>Number A:<input id="radio-a" type="radio" name="math-obj" value="a"></label><input id="num-a" type="text">
       <label>Number B:<input id="radio-b" type="radio" name="math-obj" value="b"></label><input id="num-b" type="text">
     </div>
@@ -31,13 +31,168 @@
     </div>
     <p id="result"></p>
 
-  <script>
-    const state = {
-      target: null,
-    };
+    <script>
+      let a = $('#radio-a');
+      let b = $('#radio-b');
+      let inputA = $('#num-a');
+      let inputB = $('#num-b');
+      let btns = $('.block button', true);
 
-    
-  </script>
+      let state = inputA;
+
+      $('.select').addEventListener('click', changeState, false);
+      $('.block').addEventListener('click', btnAction, false);
+
+
+      function btnAction(e) {
+        switch (e.target) {
+          case btns[0]:
+            check(state.value);
+            break;
+
+          case btns[1]:
+            if (check(inputA.value) && check(inputB.value) && Number(inputB.value) > 0) {
+              AFixedB();
+            }
+            break;
+
+          case btns[2]:
+            if (check(state.value)) {
+              absolute();
+            }
+            break;
+
+          case btns[3]:
+            if (check(state.value)) {
+              ceil();
+            }
+            break;
+
+          case btns[4]:
+            if (check(state.value)) {
+              floor();
+            }            
+            break;
+
+          case btns[5]:
+            if (check(state.value)) {
+              round();
+            }
+            break;
+
+          case btns[6]:
+            if (check(state.value)) {
+              MaxAB;
+            }          
+            break;
+
+          case btns[7]:
+            if (check(inputA.value) && check(inputB.value)) {
+              MinAB();
+            }          
+            break;
+        }
+        clear();
+
+      }
+
+      function check(n) {
+        let b = Number(n);
+        if (Number.isNaN(b) || b === 0) {
+          console.error('请输入数字');
+          return false;
+        } else {
+          console.log('正确: ' + b);
+          return true;
+        }
+      }
+
+      function AFixedB() {
+        let valueA = +inputA.value;
+        let valueB = +inputB.value;
+        console.log(valueA.toFixed(valueB));
+      }
+
+      function absolute() {
+        let valueA = +state.value;
+        if (valueA > 0) {
+          console.log(valueA)
+        } else {
+          console.log(-valueA);
+        }
+      }
+
+      function ceil() {
+        let value = +state.value;
+        console.log(Math.ceil(value));
+      }
+
+      function floor() {
+        let value = +state.value;
+        console.log(Math.floor(value));
+      }
+
+      function round() {
+        let value = +state.value;
+        console.log(Math.round(value));
+      }
+
+      function MaxAB() {
+        let valueA = +inputA.value;
+        let valueB = +inputB.value;
+        if (valueA > valueB) {
+          console.log(valueA)
+        } else {
+          console.log(valueB)
+        }
+      }
+
+      function MinAB() {
+        let valueA = +inputA.value;
+        let valueB = +inputB.value;
+        if (valueA > valueB) {
+          console.log(valueB)
+        } else {
+          console.log(valueA)
+        }
+      }
+
+      function changeState(e) {
+        switch (true) {
+          case document.activeElement === inputA:
+            state = inputA;
+            a.checked = true;
+            break;
+
+          case document.activeElement === inputB:
+            state = inputB;
+            b.checked = true;
+            break;
+
+          case a.checked:
+            state = inputA;
+            inputA.focus();
+            break;
+
+          case b.checked:
+            state = inputB;
+            inputB.focus();
+            break;
+        }
+      }
+
+      function clear() {
+        inputA.value = '';
+        inputB.value = '';
+      }
+
+      function $(e, isAll) {
+        if (isAll) {
+          return document.querySelectorAll(e);
+        }
+        return document.querySelector(e);
+      }
+    </script>
   </body>
 
 </html>
