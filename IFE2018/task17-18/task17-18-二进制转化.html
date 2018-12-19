@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <section>
+      <h2>十进制转二进制</h2>
+      <p>
+        <input
+          type="text"
+          name="transform"
+          id="transform"
+          placeholder="请输入一个十进制非负整数"
+        />
+      </p>
+      <p>
+        <input
+          type="number"
+          name="bit"
+          id="bit"
+          placeholder="输入转化后二进制数位数"
+        />
+      </p>
+      <button>Transform</button>
+      <div id="show"></div>
+    </section>
+
+    <script>
+      (function() {
+        let input = document.body.querySelector("#transform");
+        let bit = document.body.querySelector("#bit");
+        let btn = document.body.querySelector("button");
+        let show = document.body.querySelector("#show");
+
+        function transform(e) {
+          var n = Number(input.value);
+          var bitV = Number(bit.value);
+          clear(n);
+          if (
+            !check(n, "请输入一个十进制非负整数") ||
+            !check(bitV + 1, "请输入一个十进制非负整数")
+          ) {
+            showResult(0);
+            return;
+          }
+          showResult(main(n, bitV));
+        }
+
+        function main(n, bit) {
+          var arr = [];
+          while (n >= 1) {
+            arr.push(n % 2);
+            n = (n - (n % 2)) / 2;
+          }
+          n = arr.reverse();
+          if (bit === 0 || bit < n.length) {
+            return n.join("");
+          }
+          while (n.length < bit) {
+            n.unshift(0);
+          }
+          return n.join("");
+        }
+
+        function check(n, str = "出错") {
+          if (!n || Number.isNaN(n) || !Number.isInteger(n) || !n > 0) {
+            console.error(str);
+            return false;
+          }
+          return true;
+        }
+
+        function clear() {
+          input.value = "";
+          bit.value = "";
+        }
+
+        function showResult(n) {
+          show.textContent = "结果是：" + n + "(B)";
+        }
+
+        function enter(e) {
+          var code = e.keyCode;
+          if (code && code === 13) {
+            transform();
+            input.focus();
+          }
+        }
+
+        btn.addEventListener("click", transform, false);
+        input.addEventListener("keydown", enter, false);
+        bit.addEventListener("keydown", enter, false);
+      })();
+    </script>
+  </body>
+</html>

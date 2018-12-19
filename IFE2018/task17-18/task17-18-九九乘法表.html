@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>九九乘法表</title>
+  <style>
+    .table {
+      border-collapse: collapse;
+      empty-cells: hide;
+    }
+
+    .table td {
+      width: 80px;
+      text-align: center;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  
+
+<script>
+  let table = document.createElement('table');
+  let body = document.createElement('tbody');
+  let caption = table.createCaption();
+  caption.textContent = '九九乘法表';
+  table.border = '1';
+  table.className = 'table';
+  table.appendChild(body);
+  
+  let rows = body.rows;
+  let width = 9;
+  for (let i = 0; i < 9; i++) {
+    body.insertRow(i);
+    width--;
+    for (let l = 0; l < 9-width; l++) {
+      rows[i].insertCell(l);
+      rows[i].cells[l].textContent = `
+        ${l+1} * ${i+1} = ${(i+1) *(l+1)}
+      ` ;
+    }
+  }
+  document.body.appendChild(table);
+</script>
+</body>
+</html>

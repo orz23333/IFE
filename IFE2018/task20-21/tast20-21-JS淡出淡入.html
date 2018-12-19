@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tast20-21-JS淡出淡入</title>
+  </head>
+
+  <body>
+    <div id="fade" style="width:300px; height: 300px; background-color: #000">
+    </div>
+    <button>淡出</button>
+
+    <script>
+      let fadeDiv = document.querySelector('#fade');
+      let btn = document.querySelector('button');
+      let opacity = 1;
+
+      const fadeOutIn = makeFade(17);
+
+      function makeFade(ms) {
+        return function fade() {
+          btn.disabled = true;
+          if (fadeDiv.style.opacity === '1' || !fadeDiv.style.opacity) {
+            fadeOut.call(this, ms);
+          } else {
+            fadeIn.call(this, ms);
+          }
+        }
+      }
+
+      function fadeOut(ms) {
+        opacity -= 0.02;
+        fadeDiv.style.opacity = opacity;
+        console.log('ss');
+        if (opacity > 0) {
+          setTimeout(fadeOut, ms);
+        } else {
+          opacity = 0;
+          fadeOpacity = opacity;
+          btn.textContent = '淡入';
+          btn.disabled = false;
+        }
+      }
+
+      function fadeIn(ms) {
+        opacity += 0.02;
+        fadeDiv.style.opacity = opacity;
+        console.log('ss');
+        if (opacity < 1) {
+          setTimeout(fadeIn, ms);
+        } else {
+          opacity = 1;
+          fadeOpacity = opacity;
+          btn.textContent = '淡出';
+          btn.disabled = false;
+        }
+      }
+
+      btn.addEventListener('click', fadeOutIn, false);
+    </script>
+  </body>
+
+</html>

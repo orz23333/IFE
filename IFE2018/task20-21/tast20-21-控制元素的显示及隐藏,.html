@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tast20-21-控制元素的显示及隐藏,</title>
+    <style>
+      .hide {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p>
+      <label for="school">school
+        <input type="radio" name="select" id="school" checked>
+      </label>
+    </p>
+
+    <p>
+      <label for="company">company
+        <input type="radio" name="select" id="company">
+      </label>
+    </p>
+
+    <select name="school-select" id="school-select">
+      <option value="A大学">A大学</option>
+      <option value="B大学">B大学</option>
+      <option value="C大学">C大学</option>
+    </select>
+
+    <select name="company-select" id="company-select" class="hide">
+      <option value="A company">A company</option>
+      <option value="B company">B company</option>
+    </select>
+
+    <script>
+      let school = document.querySelector('#school');
+      let company = document.querySelector('#company');
+      let schoolSelect = document.querySelector('#school-select');
+      let companySelect = document.querySelector('#company-select');
+
+      company.addEventListener('change', toggle, false)
+      school.addEventListener('change', toggle, false)
+
+
+      function toggle(e) {
+        if (e.target.checked) {
+          schoolSelect.classList.toggle('hide');
+          companySelect.classList.toggle('hide');
+        }
+      }
+    </script>
+  </body>
+
+</html>

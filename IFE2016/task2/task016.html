@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div>
+      <label>城市名称：<input id="aqi-city-input" type="text"></label><br>
+      <label>空气质量指数：<input id="aqi-value-input" type="text"></label><br>
+      <button id="add-btn">确认添加</button>
+    </div>
+    
+    <table id="aqi-table" border="1">
+
+    </table>
+
+  <script>
+    function $(e) {
+      return document.body.querySelector(e);
+    }
+
+    let aqiData = [];
+    let cityName = $('#aqi-city-input');
+    let cityValue = $('#aqi-value-input');
+    let table = $('#aqi-table');
+    let btn = $('#add-btn');
+
+    addMain();
+    btn.addEventListener('click', addData, false);
+    table.addEventListener('click', removeTr, false)
+
+
+
+    function addMain() {
+      let head = table.createTHead();
+      head.insertRow();
+      head.rows[0].insertCell();
+      head.rows[0].insertCell();
+      head.rows[0].insertCell();
+      head.rows[0].cells[0].outerHTML = '<th>城市</th>';
+      head.rows[0].cells[1].outerHTML = '<th>空气质量</th>';
+      head.rows[0].cells[2].outerHTML = '<th>操作</th>';
+
+      let tBody = document.createElement('tBody');
+      table.appendChild(tBody);
+    }
+
+
+    function toggleTHead() {
+      if (!table.tBodies[0].rows.length) {
+        while (table.firstChild) {
+          table.removeChild(table.firstChild);
+        }
+      } 
+      else {
+        addMain();
+      }
+    }
+
+
+    function filter(text) {
+      return text.replace(/ /g, '');
+    }
+
+
+    function addData() {
+      let name = filter(cityName.value);
+      let value = Number(filter(cityValue.value));
+      if (Number.isInteger(value) 
+          && (/^[\u4e00-\u9fa5]/.test(name)
+          || /^[a-zA-Z]/.test(name)) ) 
+        {
+          let arr = [];
+          arr.push(name, value);
+          aqiData.push(arr);
+          addTable();    
+      }
+      else {
+        alert('城市名称必须为中英文字符，空气质量指数必须为整数');
+      } 
+      cityName.value = '';
+      cityValue.value = '';
+      
+    }
+
+
+    function addTable() {     
+      table.tBodies[0].insertRow();
+      let newRowIndex = table.tBodies[0].rows.length; 
+      table.tBodies[0].rows[newRowIndex-1].insertCell();
+      table.tBodies[0].rows[newRowIndex-1].insertCell();
+      table.tBodies[0].rows[newRowIndex-1].insertCell();
+
+      let cells =  table.tBodies[0].rows[newRowIndex-1].cells;
+      let list = aqiData.pop();
+      for (let i = 0; i < cells.length-1; i++) {
+        cells[i].textContent = list[i];       
+      }
+      cells[cells.length-1].innerHTML = '<button>删除</button>';
+      aqiData.push(list);
+    }
+
+
+
+    function removeTr(e) {
+      let btn = e.target;
+      if (btn.nodeName.toLowerCase() !== 'button') {
+        return;
+      }
+      let tr = btn.parentNode.parentNode;
+      let trParent = btn.parentNode.parentNode.parentNode;
+      trParent.removeChild(tr);   
+    }
+  </script>
+  </body>
+
+</html>

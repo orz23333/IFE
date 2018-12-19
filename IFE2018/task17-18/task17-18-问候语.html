@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>task17-18-问候语</title>
+</head>
+<body>
+  
+
+<script>
+  var hours = new Date().getHours();
+  switch(true) {
+    case hours > 6 && hours < 12: {
+      console.log('早上好');
+      break;
+    }
+    case hours == 12: {
+      console.log('中午好');
+      break;
+    }
+    case hours > 12 && hours < 18: {
+      console.log('下午好');
+      break;
+    }
+    case hours >= 18 || hours <= 6: {
+      console.log('晚上好');
+      break;
+    }
+    default:
+      console.log('nihao');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task20-21-帧动画</title>
+    <style>
+      .show {
+        width: 480px;
+        height: 480px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .show img {
+        position: absolute;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="show">
+      <img src="./erik_ce204002.jpg" alt="帧动画">
+    </div>
+    <p>dsaf ds</p>
+
+    <script>
+      (function () {
+        var img = document.querySelector('img');
+        img.style.top = '0';
+        let imgTop = 0;
+
+        function gofoward(ms) {
+          imgTop -= 480;
+          img.style.top = imgTop + 'px';
+          console.log('gofoward');
+          if (imgTop > -7680) {
+            setTimeout(gofoward, ms, ms);
+          } else {
+            imgTop = -8160;
+          }
+        }
+
+        function turnback(ms) {
+          imgTop += 480;
+          img.style.top = imgTop + 'px';
+          console.log('turnback');
+          if (imgTop < 0) {
+            setTimeout(turnback, ms, ms);
+          } else {
+            imgTop = 0;
+          }
+        }
+
+        var makeAnimation = function (ms1, ms2) {
+          if (imgTop === 0) {
+            gofoward(ms1);
+          } else if (imgTop === -8160) {
+            turnback(ms1);
+          }
+          setTimeout(makeAnimation, ms2, ms1, ms2);
+        };
+
+        var handler = makeAnimation(100, 1);
+      })()
+    </script>
+  </body>
+
+</html>
