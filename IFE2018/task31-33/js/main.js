@@ -3,7 +3,33 @@
       let saleList = $('input', $('#sale'), true);
       let showData = $('#showData');
       let btn = $('#submit');
+      let toggle = $('#toggle');
       btn.addEventListener('click', submitEvent, false);
+      toggle.addEventListener('click', toggleSelect, false);
+
+      init();
+
+      function init() {
+        productList[0].checked = true;
+        regionList[0].checked = true;
+        for (let i = 0; i < saleList.length; i++) {
+          saleList[i].checked = true;
+        }
+        clickEvent();        
+      }
+
+      function toggleSelect(e) {
+        e.preventDefault();
+        for (let i = 0; i < saleList.length; i++) {
+          saleList[i].checked = !saleList[i].checked;
+        }
+      }
+
+      function clickEvent() {
+        let event = document.createEvent('MouseEvents');
+        event.initMouseEvent('click', true, true, document.defaultView);
+        btn.dispatchEvent(event);
+      }
 
 
       function submitEvent(e) {
@@ -25,10 +51,16 @@
           showData.removeChild(showData.firstChild);
         }
 
-        if (!arr || arr.length == 0) {
+        let test = Array.from(saleList).some((v,i) => {
+          return v.checked != false;
+        });
+
+        if (!arr || arr.length == 0 || !test) {
           showData.textContent = '无符合要求的数据';
           return;
         }
+
+        console.log(arr);
 
         let mouth = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
         let table = document.createElement('table');
@@ -54,10 +86,14 @@
           body.insertRow(i);
           for (let l = 0; l < 14; l++) {
             body.rows[i].insertCell(l);
-            if (l>1) {
-              body.rows[i].cells[l].textContent = arr[i].sale[l-2];
-            }
           }
+          for (let l = 0; l < arr[i].sale.length; l++) {
+            const e = arr[i].sale[l];
+            let cache = e.split('-');
+            let index = +cache[0] + 2;
+            body.rows[i].cells[index].textContent = cache[1];
+          }
+
           body.rows[i].cells[0].textContent = arr[i].product;
           body.rows[i].cells[1].textContent = arr[i].region;
         }
@@ -79,8 +115,12 @@
           let cache = JSON.stringify(Data);
           cache = JSON.parse(cache);   
           for (let l = 0; l < Data.length; l++) {
-            let saleCache = Data[l][type].filter((v, i) => {
-              return arr.includes(i + '');
+            let saleCache = Data[l][type].map((v, i) => {
+              return i + '-' + v;
+            })
+            saleCache = saleCache.filter((v, i) => {
+              let newCache = v.split('-');
+              return arr.includes(newCache[0]);
             })
             cache[l][type] = saleCache
           }

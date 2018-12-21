@@ -26,6 +26,7 @@
         display: inline-block;
         border: 1px solid orange;
         margin-right: 5px;
+        margin-top: 5px;
         padding: 2px;
       }
 
@@ -35,8 +36,15 @@
 
       .table {
         margin: auto;
+        border-collapse: collapse;
       }
 
       .table td {
         width: 50px;
+        padding: 5px;
       }
+
+      .table tr:nth-of-type(even) {
+        background-color: antiquewhite;
+      }
+
