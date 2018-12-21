@@ -1,0 +1,42 @@
+      #product span,
+      #region span {
+        display: inline-block;
+        width: 70px;
+      }
+
+      #product span:first-of-type,
+      #region span:first-of-type {
+        display: inline-block;
+        width: 60px;
+      }
+
+      #product span:last-of-type,
+      #region span:last-of-type {
+        display: inline-block;
+        width: 90px;
+      }
+
+      #product input,
+      #region input {
+        float: right;
+      }
+
+
+      #product span, #region span, #sale span {
+        display: inline-block;
+        border: 1px solid orange;
+        margin-right: 5px;
+        padding: 2px;
+      }
+
+      div {
+        margin-top: 10px;
+      }
+
+      .table {
+        margin: auto;
+      }
+
+      .table td {
+        width: 50px;
+      }

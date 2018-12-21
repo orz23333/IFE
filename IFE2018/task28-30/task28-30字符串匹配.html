@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task28-30字符串匹配</title>
+    <style>
+      #email-sug-wrapper {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border: 1px solid #ccc;
+        border-top: 0;
+        width: 202px;
+        overflow: hidden;
+      }
+
+      .keyselect {
+        background-color: antiquewhite;
+      }
+
+      .hover {
+        background-color: rgb(209, 117, 117);
+      }
+
+      #email-sug-wrapper li {
+        line-height: 2;
+        padding-left: 5px;
+        cursor: pointer;
+      }
+
+      #email-input {
+        width: 200px;
+      }
+
+      .hide {
+        display: none;
+      }
+
+
+    </style>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <input id="email-input" type="text">
+      <ul id="email-sug-wrapper" class="email-sug">
+      </ul>
+    </div>
+
+    <script>
+      let ul = $('#email-sug-wrapper');
+      let input = $('#email-input');
+      var postfixList = ['@163.com', '@gmail.com', '@126.com', '@qq.com', '@263.net'];
+      input.focus();
+      input.addEventListener('input', inputEvent, false);
+      input.addEventListener('keydown', keySelect, false);
+      ul.addEventListener('click', select, false);
+      ul.addEventListener('mouseover', moveIn, false);
+      ul.addEventListener('mouseout', moveOut, false);
+
+      function keySelect(e) {       
+        let firstLi = ul.firstElementChild;
+        let keyCode = e.keyCode;
+        if (!firstLi) {
+          return;
+        };
+        let liList = ul.childNodes;
+        let targetLiIndex = 0;
+        for (let i = 0; i < liList.length; i++) {
+          if (liList[i].classList.contains('keyselect')) {
+            targetLiIndex = i;
+            break;
+          }  
+        }
+        let targetLi = liList[targetLiIndex];
+        switch (keyCode) {
+          case 38:
+            e.preventDefault();
+            targetLi.classList.remove('keyselect');
+            if (!targetLi.previousElementSibling) {              
+              ul.lastElementChild.classList.add('keyselect')
+            }
+            else {
+              targetLi.previousElementSibling.classList.add('keyselect');
+            }
+            break;
+
+          case 40:
+            e.preventDefault();
+            targetLi.classList.remove('keyselect');
+            if (!targetLi.nextElementSibling) {              
+              ul.firstElementChild.classList.add('keyselect')
+            }
+            else {
+              targetLi.nextElementSibling.classList.add('keyselect');
+            }
+            break;
+
+            case 27:
+              e.target.select();
+              break;
+
+            case 13:
+              $('#email-input').value = targetLi.textContent;
+              hide();
+              $('#email-input').focus();
+        }
+      }
+
+      function inputEvent(e) {
+        let s = getInput(e);
+        let textArr = makeContent(s);
+        addContent(textArr);
+        isShow(e);
+      }
+
+      function select(e) {
+        let lis = $('#email-sug-wrapper li', true);
+        for (let i = 0; i < lis.length; i++) {
+          if (e.target === lis[i]) {
+            $('#email-input').value = e.target.textContent;
+          }
+        }
+        hide();
+        $('#email-input').focus();
+      }
+
+      function moveIn(e) {
+        if (e.target.nodeName.toLowerCase() === 'li') {
+          e.target.classList.add('hover')
+        }
+      }
+
+      function moveOut(e) {
+        if (e.target.nodeName.toLowerCase() === 'li') {
+          e.target.classList.remove('hover');
+        }
+      }
+
+      function getInput(e) {
+        return e.target.value.trim();
+      }
+
+      function makeContent(text) {
+        let s = text.split('@');
+        let arr = [];
+        for (let i = 0; i < postfixList.length; i++) {
+          if (s[1] && postfixList[i].includes(s[1])) {
+            arr.push(s[0] + postfixList[i]);
+          } else if (!s[1]) {
+            arr.push(s[0] + postfixList[i]);
+          }
+        }
+        if (arr.length === 0) {
+          for (let i = 0; i < postfixList.length; i++) {
+            arr.push(s[0] + postfixList[i]);
+          }
+        }
+        return arr;
+      }
+
+      function addContent(arr) {
+        let ul = $('#email-sug-wrapper');
+        while (ul.firstChild) {
+          ul.removeChild(ul.firstChild);
+        }
+        let fragment = document.createDocumentFragment();
+        for (let i = 0; i < arr.length; i++) {
+          let li = document.createElement('li');
+          li.textContent = arr[i];
+          if (i == 0) {
+            li.classList.add('keyselect')
+          }          
+          fragment.appendChild(li);
+        }
+        ul.appendChild(fragment);
+      }
+
+      function isShow(e) {
+        if (getInput(e)) {
+          show();
+        } else {
+          hide();
+        }
+      }
+
+      function show() {
+        let ul = $('#email-sug-wrapper');
+        if (ul.classList.contains('hide')) {
+          ul.classList.remove('hide');
+        }
+      }
+
+      function hide() {
+        let ul = $('#email-sug-wrapper');
+        if (!ul.classList.contains('hide')) {
+          ul.classList.add('hide');
+        }
+      }
+
+      function $(e, isAll = false) {
+        if (isAll) {
+          return document.querySelectorAll(e);
+        }
+        return document.querySelector(e);
+      }
+    </script>
+  </body>
+
+</html>
