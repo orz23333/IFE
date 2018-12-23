@@ -37,7 +37,7 @@
             console.log(person.name + '请就坐');
             return true;
           } else if (this.seats == 0) {
-            console.log(person.name + ', 内已坐满，您的排号是：' + this.rank.length + 1);
+            console.log(person.name + ', 内已坐满，您的排号是：' + (this.rank.length + 1));
             person.number = this.rank.length + 1;
             this.rank.push(person);
             return false;
@@ -49,10 +49,13 @@
             this.seats++;
             if (this.rank.length > 0) {
               console.log('下一位顾客');
-              this.addCustomer(this.rank.shift());
+              return this.rank.shift();
             } else {
               console.log('服务完毕，没有更多顾客');
+              return false;
             }
+          } else {
+            return false;
           }
         }
       }
@@ -90,6 +93,7 @@
               customerName = list[i][0];
             }
             console.log(customerName + '上菜' );
+            this.foodList = [];
           } else {
             let [name, ...food] = arr;
             this.foodList.push([
@@ -120,6 +124,7 @@
         constructor(name) {
           this.name = name;
           this.number = 0;
+          this.order = [];
         }
 
         makeOrder(...food) {
@@ -156,6 +161,9 @@
       };
 
       const newCustomer = function (person) {
+        if (!person) {
+          return;
+        }
         let useable = restaurant.addCustomer(person);
         if (useable) {
           //获得客户的订单
@@ -169,7 +177,7 @@
             seriver.receiveOrder();
             let eatDone = person.eat();
             eatDone.then(() => {
-              restaurant.reduceCustomer();
+              newCustomer(restaurant.reduceCustomer());
             })
           })
         }
@@ -181,6 +189,7 @@
       let seriver = singleServier('jack', 3000);
       let Gan = new Customer('Gan');
       let Li = new Customer('Li');
+      let Xu = new Customer('Xu');
 
 
       let restaurant = new Restaurant({
@@ -198,9 +207,7 @@
       Gan.makeOrder(menu[0], menu[2]);
       newCustomer(Gan)
       newCustomer(Li)
-      newCustomer(Gan)
-      
-
+      newCustomer(Xu)
     </script>
   </body>
 
