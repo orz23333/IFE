@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task42-43-1</title>
+  </head>
+
+  <body>
+
+
+    <script>
+      class Restaurant {
+        constructor(person) {
+          this.cash = person.cash;
+          this.seats = person.seats;
+          this.staff = person.staff;
+        }
+
+        hire(employee) {
+          this.staff.push(employee);
+        }
+
+        fire(employee) {
+          let index = this.staff.findIndex((v, i, arr) => {
+            return v == employee;
+          });
+          this.staff.splice(index, 1);
+        }
+      }
+
+
+      class Employee {
+        constructor(name, salary) {
+          this.makeId();
+          this.name = name;
+          this.salary = salary;
+        }
+
+        work(fn, ...list) {
+          fn.apply(this, list);
+        }
+
+        makeId() {
+          this.id = Employee.id++;
+        }
+      }
+      Employee.id = 0;
+
+
+      class Seriver extends Employee {
+        constructor(name, salary) {
+          super(name, salary);
+          this.foodList = [];
+        }
+
+        receiveOrder({ ...arr
+        }) {
+          if (arr.length == 0) {
+            console.log('上菜' + this.foodList);
+          } else {
+            this.foodList.push({
+              id: arr.id,
+              food: arr.food
+            });
+          }
+        }
+      }
+
+      class Cook extends Employee {
+        constructor(name, salary) {
+          super(name, salary);
+        }
+
+        makeFood(order) {
+          let timer = setTimeout(() => {
+            console.log(order + 'done');
+          }, 1000);
+        }
+      }
+
+      class Customer {
+        constructor(name, number) {
+          this.name = name;
+          this.number = number;
+        }
+
+        makeOrder(...food) {
+          this.order = food;
+        }
+
+        eat() {
+          console.log('开吃噜: ' + this.order);
+        }
+      }
+
+      class Food {
+        constructor(name, cost, price) {
+          this.name = name;
+          this.cost = cost;
+          this.price = price;
+        }
+      }
+
+      var ifeRestaurant = new Restaurant({
+        cash: 1000000,
+        seats: 20,
+        staff: []
+      });
+
+      var newCook = new Cook("Tony", 10000);
+      ifeRestaurant.hire(newCook);
+
+      console.log(ifeRestaurant.staff);
+
+      ifeRestaurant.fire(newCook);
+      console.log(ifeRestaurant.staff);
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>task44-46-1-ES6</title>
+  </head>
+
+  <body>
+
+
+    <script>
+      class Restaurant {
+        constructor(person) {
+          this.cash = person.cash;
+          this.seats = person.seats;
+          this.staff = person.staff;
+          this.rank = [];
+        }
+
+        hire(...employee) {
+          this.staff.push(...employee);
+        }
+
+        fire(employee) {
+          let index = this.staff.findIndex((v, i, arr) => {
+            return v == employee;
+          });
+          this.staff.splice(index, 1);
+        }
+
+        addCustomer(person) {
+          if (this.seats == 1) {
+            this.seats--;
+            console.log(person.name + '请就坐');
+            return true;
+          } else if (this.seats == 0) {
+            console.log(person.name + ', 内已坐满，您的排号是：' + this.rank.length + 1);
+            person.number = this.rank.length + 1;
+            this.rank.push(person);
+            return false;
+          }
+        }
+
+        reduceCustomer() {
+          if (this.seats == 0) {
+            this.seats++;
+            if (this.rank.length > 0) {
+              console.log('下一位顾客');
+              this.addCustomer(this.rank.shift());
+            } else {
+              console.log('服务完毕，没有更多顾客');
+            }
+          }
+        }
+      }
+
+
+      class Employee {
+        constructor(name, salary) {
+          this.makeId();
+          this.name = name;
+          this.salary = salary;
+        }
+
+        work(fn, ...list) {
+          fn.apply(this, list);
+        }
+
+        makeId() {
+          this.id = Employee.id++;
+        }
+      }
+      Employee.id = 0;
+
+
+      class Seriver extends Employee {
+        constructor(name, salary) {
+          super(name, salary);
+          this.foodList = [];
+        }
+
+        receiveOrder(...arr) {
+          if (arr.length == 0) {
+            let list = this.foodList;
+            let customerName;
+            for (let i = 0; i < list.length; i++) {
+              customerName = list[i][0];
+            }
+            console.log(customerName + '上菜' );
+          } else {
+            let [name, ...food] = arr;
+            this.foodList.push([
+              name,
+              food
+            ]);
+          }
+        }
+      }
+
+      class Cook extends Employee {
+        constructor(name, salary) {
+          super(name, salary);
+        }
+
+        makeFood(order) {
+          return new Promise((resolve, reject) => {
+            let timer = setTimeout(() => {
+              console.log(order[0][0] + '的菜厨师已完成');
+              timer = null;
+              resolve(true);
+            }, 2000);
+          })
+        }
+      }
+
+      class Customer {
+        constructor(name) {
+          this.name = name;
+          this.number = 0;
+        }
+
+        makeOrder(...food) {
+          this.order = food;
+        }
+
+        eat() {
+          return new Promise((resolve, reject) => {
+            let timer = setTimeout(() => {
+              console.log(this.name + '吃饱了');
+              resolve();
+            }, 2000);
+          })
+        }
+      }
+
+      class Food {
+        constructor(name, cost, price) {
+          this.name = name;
+          this.cost = cost;
+          this.price = price;
+        }
+      }
+
+      let getSingle = function (fn) {
+        let single;
+        return function () {
+          if (single) {
+            return single;
+          } else {
+            return single = new fn(...arguments);
+          }
+        }
+      };
+
+      const newCustomer = function (person) {
+        let useable = restaurant.addCustomer(person);
+        if (useable) {
+          //获得客户的订单
+          let seriver = singleServier('jack', 3000);
+          let cook = singleCook('tony', 10000);
+          seriver.receiveOrder(person.name, ...person.order);
+
+          let foodDone = cook.makeFood(seriver.foodList)
+
+          foodDone.then(() => {
+            seriver.receiveOrder();
+            let eatDone = person.eat();
+            eatDone.then(() => {
+              restaurant.reduceCustomer();
+            })
+          })
+        }
+      }
+
+      let singleCook = getSingle(Cook);
+      let singleServier = getSingle(Seriver);
+      let cook = singleCook('tony', 10000);
+      let seriver = singleServier('jack', 3000);
+      let Gan = new Customer('Gan');
+      let Li = new Customer('Li');
+
+
+      let restaurant = new Restaurant({
+        cash: 1000000,
+        seats: 1,
+        staff: []
+      });
+      restaurant.hire(cook, seriver);
+      let menu = [
+        new Food('one', 5, 10),
+        new Food('two', 10, 20),
+        new Food('three', 50, 100)
+      ];
+
+      Gan.makeOrder(menu[0], menu[2]);
+      newCustomer(Gan)
+      newCustomer(Li)
+      newCustomer(Gan)
+      
+
+    </script>
+  </body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script src="../js/all.js"></script>
+    <script src="./js/Chart.js"></script>
+  </head>
+
+  <body>
+
+    <canvas id="bar-chart" width=300" height="150"></canvas>
+
+    <script>
+      let canvas = document.getElementById("bar-chart");
+      let config = {
+        type: 'bar',
+        data: {
+          labels: ["North America", "Latin America", "Europe", "Asia", "Africa"],
+          datasets: [
+          {
+            label: "Number of developers (millions)",
+            backgroundColor: 'red',
+            data: [7, 4, 6, 9, 3]
+          },
+          {
+            label: "(millions)",
+            data: [20, 5, 12, 15, 25]
+          }          
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'Number of Developers in Every Continent'
+          },
+
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        }
+
+      }
+      new Chart(canvas, config);
+    </script>
+
+  </body>
+
+</html>
